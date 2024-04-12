@@ -1,0 +1,65 @@
+\documentclass[a4paper,english,pointlessnumbers,bibtotoc,BCOR1.5cm,headsepline,DIV12,appendixprefix,final,openany]{scrbook}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage{bibgerm}
+\usepackage{url}
+\usepackage{svg}
+
+\graphicspath{ {./images/} }
+
+\setlength{\parindent}{0em} 
+
+\begin{document}
+
+\frontmatter
+\subject{{\LARGE Großer Beleg}}
+\title{Software-defined CPU modes}
+\author{Pascal Stöver}
+\publishers{Technische Universität Dresden\\
+Fakultät Informatik\\
+Institut für Systemarchitektur\\
+Professur Betriebssysteme
+\begin{minipage}{\textwidth}%\\
+    \vskip 6cm
+     {\normalsize }\begin{tabular}{ll}
+    Betreuender Mitarbeiter: &
+    Dr.-Ing. Michael Roitzsch\tabularnewline
+    Betreuender Mitarbeiter:&
+    Dr.-Ing. Nils Asmussen\tabularnewline
+    \end{tabular} {\normalsize }\end{minipage}}
+
+\maketitle
+
+\tableofcontents
+\listoffigures
+
+\mainmatter
+
+\input{introduction.tex}
+\input{state.tex}
+\input{design.tex}
+\input{implementation.tex}
+\input{evaluation.tex}
+\input{conclusion.tex}
+
+%\appendix
+
+%\addchap{Glossar}
+
+%\begin{description}
+%\item [CSR] control and status register
+%\item [MLB] Mode-lookaside buffer
+%\item [PC] program counter
+%\item [PLB] Permission-lookaside buffer
+%\end{description}
+
+\bibliographystyle{acm}
+\bibliography{own}
+
+\end{document}

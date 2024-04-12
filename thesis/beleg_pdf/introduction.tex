@@ -1,0 +1,79 @@
+\chapter{Introduction}
+\pagenumbering{arabic}
+In the past, the interaction between the operating system and the processor was
+relatively straightforward. A privileged mode, known as the kernel mode, granted
+access to privileged features such as page table manipulation and interrupt
+handling. This mode hosted the operating system, overseeing applications in the
+unprivileged user mode. However, in recent years, the operating systems and
+security communities have sought more than these two simplistic modes to enhance
+performance and security. In response to this demand, hardware manufacturers introduced a variety of
+new modes, addressing aspects like nested paging for hypervisors or modes
+designed for heightened isolation, providing an exceptionally secure context for
+execution. While these modes offer solutions for various specialized use cases,
+they also introduce significant complexity to hardware, incurring substantial
+development costs. As ideas for new modes continue to emerge, a crucial question
+arises: Is it feasible to abstract the intricate mode-handling hardware into
+software, thereby enabling software-defined CPU modes?\par 
+Constructing a prototype of a CPU equipped with software-defined modes poses two
+significant challenges. Firstly, there is the issue of handling a mode switch in
+software without incurring a significant performance overhead. Secondly, the design of
+a memory protection mechanism needs to address the complexity of accommodating
+an arbitrary number of modes. The current paging mechanism, designed with only two
+modes in mind, is optimized for this specific use case and falls short of
+providing the required performance to handle a substantial number of modes, due
+to a inefficient handling of access rights for multiple modes which is done on a
+three bit per mode level. Consequently, a novel approach to memory protection
+must be devised, one that transcends the limitations of the existing mechanism and allows for the dynamic
+management of an extensive range of modes. The resolution of these challenges is
+pivotal in realizing a functional prototype that not only supports
+software-defined CPU modes effectively but also addresses the associated
+performance considerations and memory protection requirements.\par
+Previous efforts, particularly the work of von Elm.\cite{Cve}, have delved into addressing
+the two aforementioned challenges. Von Elm's work, while successfully
+implementing a mode switch mechanism with multiple definable modes, placed a
+greater emphasis on devising a memory protection mechanism suitable for
+accommodating multiple modes. In focusing on this aspect, he developed a
+highly efficient protection mechanism that leverages a combination of paging and
+segmentation to meet the required specifications. However, it's essential to
+note that the actual mode switch, despite the advancements in memory protection,
+remains hardware-based in his implementation.To simplify the hardware
+implementation, von Elm opted for a hierarchy-based approach, necessitating a
+predefined supervisor mode. While effective in certain respects, this
+hierarchical approach falls short of providing the flexibility inherent in a
+fully software-based mode switch behavior.\par
+In this study, I leverage von Elm's approach for memory protection but overhaul
+the implementation of mode switching behavior, which is currently predominantly
+hardware-based. I aim to make the switch behavior entirely definable in
+software, introducing the concept of independent modes that can be dynamically
+created and utilized during runtime. To achieve this, I introduce a novel mode
+named the \emph{Mode Switch Mode}. This mode comes into play whenever a mode switch
+is required and dictates the alterations to crucial registers necessary for the
+transition. Adopting a design incorporating this mode empowers programmers to
+write the code responsible for executing the actual mode switch. As an
+alternative approach, the Mode Switch Mode is offloaded to a secondary CPU known
+as the \emph{Control Core}. This dedicated CPU activates each time a mode switch
+occurs and, based on its own programming, changes the mode of the main CPU. The
+goal is to alleviate concerns about altering the CPU state for the code running
+on the Control Core, thereby reducing the state-save overhead. While some
+benchmarks demonstrate a performance gain, the limited scope of these
+microbenchmarks and the absence of evaluation of hardware costs provide only
+suggestive evidence rather than conclusive statements regarding the comparison
+of the two approaches. Consequently, this thesis primarily underscores the
+feasibility of software-defined CPU modes through prototypical implementations
+of the two proposed designs.\par
+This thesis is organized as follows: Chapter 2 provides an exploration of
+preexisting mode isolation techniques, along with general information about CPU
+architecture, with a focus on the Risc-V architecture, which serves as the
+framework for my designs. The gem5 simulator is introduced as the primary tool
+employed for the simulation of my designs. In Chapter 3, a comprehensive
+overview of von Elm's work, which forms the basis of this thesis, is presented.
+Chapter 4 delves into the detailed presentation of the two designs, discussing
+various design choices. The subsequent chapter, Chapter 5, offers an insight
+into the implementation of these designs within the gem5 simulator. Moving on to
+Chapter 6, the microbenchmarks are explained, and the results of these
+benchmarks are evaluated. Limitations of the benchmarks are also revealed in
+this section. In Chapter 7, a more in-depth examination of these shortcomings is
+provided, accompanied by an overview of potential avenues for future
+improvements to mitigate these issues. Finally, Chapter 8 concludes the thesis,
+offering a concise description of the contributions made in the course of this
+research.

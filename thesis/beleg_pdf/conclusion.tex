@@ -1,0 +1,26 @@
+\chapter{Conclusion}
+In this thesis, I have explored the management of software-defined CPU modes
+through two distinct designs. The central inquiry addressed whether it's viable
+to make these modes entirely software-definable, departing from reliance on
+pre-defined hardware. To this end, I transitioned the control plane into a
+software environment, aiming to provide more flexibility and customization.\par
+An earlier attempt by von Elm. \cite{Cve} primarily focused on memory protection, offering a
+solution for fine-grained protection but with limitations in flexibility due to
+hierarchical structuring and fixed supervisor modes. In response, my approach
+extended definable permissions to include control and status registers, enabling
+the creation of entirely software-definable modes, such as the supervisor mode.
+Additionally, I introduced the Mode Switch Mode, executed entirely in software,
+to assume hardware responsibilities, thereby eliminating hierarchical structures
+and allowing arbitrary checks on mode transitions.\par
+The subsequent design, the Control Core, proposed employing a dedicated CPU for
+mode switches to potentially enhance system performance. Micro-benchmarks were
+designed to evaluate functionality and performance, suggesting significant
+performance enhancements with a second Core, particularly in scenarios utilizing
+numerous registers. However, limitations in benchmark relevance to real-world
+systems and unaddressed implementation costs highlight areas for further
+investigation.\par
+Despite these limitations, this thesis illustrates the feasibility of designing
+a processor with freely definable modes, with the option of a dedicated CPU for
+their management. This offers avenues for exploring alternative architectures
+leveraging software-defined modes, paving the way for potential advancements in
+processor design.\par

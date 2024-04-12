@@ -1,0 +1,35 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+
+\title{Software-defined CPU-modes}
+\author{Pascal Stoever}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+In recent years, CPU manufacturers have introduced additional operating modes to
+their CPUs, in addition to privileged and unprivileged modes, like Intel SGX or
+ARM Trustzone. These modes are all implemented in hardware and are therefore
+need to be taken as is to the operating system and applications. This
+development raises the question of whether it is possible to define such modes
+in software and what challenges are associated with this approach.\par
+
+One approach to this problem could be the introduction of an so called
+"Mode-Switch-Mode". This approach envisions a single hardware-provided mode,
+called the Mode-Switch Mode,responsible for transitioning between other modes.
+Whenever a transition occurs, the CPU switches to the Mode-Switch Mode, which
+configures the CPU to enter the desired mode.\par
+
+In this presentation, I will explain the concept of this "Mode-Switch-Mode" in
+detail and discuss some of the difficulties which occurred while trying to
+implement it in the gem5 simulator.
+
+
+
+
+\end{abstract}
+
+\end{document}
